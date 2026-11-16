@@ -7,6 +7,8 @@ from app.pipeline.model import Classifier, StubClassifier
 from app.store import Store
 
 store = Store()
+if settings.seed_demo_user:
+    store.seed_demo_user()
 model: Classifier = StubClassifier(version=settings.model_version)
 
 

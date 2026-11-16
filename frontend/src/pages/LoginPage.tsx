@@ -5,6 +5,9 @@ import { useAuth } from "../auth/AuthContext";
 import { Notice } from "../components/ui";
 import { validateEmail, validatePassword } from "../lib/validation";
 
+// Matches the account the backend creates at start-up (backend/app/store.py).
+const DEMO = { email: "demo@example.com", password: "demo-password" };
+
 export function LoginPage() {
   const { session, signIn } = useAuth();
   const navigate = useNavigate();
@@ -31,6 +34,19 @@ export function LoginPage() {
     setBusy(true);
     try {
       signIn(mode === "signup" ? await api.signup(email, password) : await api.login(email, password));
+      navigate(from, { replace: true });
+    } catch (e) {
+      setServerError(e instanceof ApiError ? e.message : "Something went wrong. Please try again.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function useDemo() {
+    setBusy(true);
+    setServerError(null);
+    try {
+      signIn(await api.login(DEMO.email, DEMO.password));
       navigate(from, { replace: true });
     } catch (e) {
       setServerError(e instanceof ApiError ? e.message : "Something went wrong. Please try again.");
@@ -67,6 +83,13 @@ export function LoginPage() {
       <button className="link-btn center" onClick={() => { setMode(mode === "login" ? "signup" : "login"); setShowErrors(false); setServerError(null); }}>
         {mode === "login" ? "New here? Create an account" : "Already have an account? Log in"}
       </button>
+      {/* Only shown while developing (npm run dev), never in the built app. */}
+      {import.meta.env.DEV && (
+        <section className="card center">
+          <p className="muted small">Testing? Use the demo account: {DEMO.email} / {DEMO.password}</p>
+          <button type="button" className="btn btn-secondary" disabled={busy} onClick={useDemo}>Log in as demo user</button>
+        </section>
+      )}
     </div>
   );
 }

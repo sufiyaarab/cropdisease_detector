@@ -20,12 +20,21 @@ def _hash(password: str, salt: bytes) -> bytes:
     return hashlib.pbkdf2_hmac("sha256", password.encode(), salt, 200_000)
 
 
+# Ready-made account for local testing, because accounts are wiped on every restart.
+# The same values are in frontend/src/pages/LoginPage.tsx.
+DEMO_EMAIL = "demo@example.com"
+DEMO_PASSWORD = "demo-password"
+
+
 class Store:
     def __init__(self) -> None:
         self.users: dict[str, dict] = {}  # email -> user
         self.tokens: dict[str, str] = {}  # token -> email
         self.scans: dict[str, dict] = {}  # scan id -> {owner, result, photos}
         self.plants: dict[str, dict] = {}  # plant id -> plant
+
+    def seed_demo_user(self) -> None:
+        self.create_user(DEMO_EMAIL, DEMO_PASSWORD)
 
     # users ---------------------------------------------------------------
     def create_user(self, email: str, password: str) -> dict | None:

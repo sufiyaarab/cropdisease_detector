@@ -14,6 +14,16 @@ def test_signup_login_logout(client):
     assert client.get("/plants", headers=headers).json()["code"] == "session_expired"
 
 
+def test_demo_account_is_seeded():
+    from app.store import DEMO_EMAIL, DEMO_PASSWORD, Store
+
+    store = Store()
+    assert store.check_password(DEMO_EMAIL, DEMO_PASSWORD) is None
+    store.seed_demo_user()
+    store.seed_demo_user()  # safe to call twice
+    assert store.check_password(DEMO_EMAIL, DEMO_PASSWORD)["email"] == DEMO_EMAIL
+
+
 def test_auth_validation(client):
     assert client.post("/auth/signup", json={"email": "nope", "password": "long-enough"}).json()["code"] == "invalid_email"
     assert client.post("/auth/signup", json={"email": "a@b.co", "password": "short"}).json()["code"] == "invalid_request"

@@ -19,6 +19,8 @@ class Settings:
     # Below this calibrated confidence the app says "not sure" (Report 2, final concept).
     confidence_threshold: float = _float("CONFIDENCE_THRESHOLD", 0.70)
     model_version: str = os.getenv("MODEL_VERSION", "stub-0.1")
+    # Local development only: creates a ready-made account at start-up. Set to false in production.
+    seed_demo_user: bool = os.getenv("SEED_DEMO_USER", "true").lower() == "true"
 
     # Photo validation limits. Tune these with real field photos.
     max_photos: int = _int("MAX_PHOTOS", 3)
