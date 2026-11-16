@@ -1,0 +1,33 @@
+"""Settings read from environment variables, with safe defaults for local work."""
+import os
+from dataclasses import dataclass, field
+
+
+def _float(name: str, default: float) -> float:
+    return float(os.getenv(name, default))
+
+
+def _int(name: str, default: int) -> int:
+    return int(os.getenv(name, default))
+
+
+@dataclass(frozen=True)
+class Settings:
+    allowed_origins: list[str] = field(
+        default_factory=lambda: os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+    )
+    # Below this calibrated confidence the app says "not sure" (Report 2, final concept).
+    confidence_threshold: float = _float("CONFIDENCE_THRESHOLD", 0.70)
+    model_version: str = os.getenv("MODEL_VERSION", "stub-0.1")
+
+    # Photo validation limits. Tune these with real field photos.
+    max_photos: int = _int("MAX_PHOTOS", 3)
+    max_upload_bytes: int = _int("MAX_UPLOAD_BYTES", 8 * 1024 * 1024)
+    min_side_px: int = _int("MIN_SIDE_PX", 224)
+    min_sharpness: float = _float("MIN_SHARPNESS", 40.0)
+    min_brightness: float = _float("MIN_BRIGHTNESS", 40.0)
+    max_brightness: float = _float("MAX_BRIGHTNESS", 225.0)
+    min_plant_ratio: float = _float("MIN_PLANT_RATIO", 0.12)
+
+
+settings = Settings()

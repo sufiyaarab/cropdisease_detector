@@ -1,0 +1,28 @@
+# Secrets: never commit real keys
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+dist/
+
+# ML: weights and datasets live on Hugging Face Hub / Drive, not in git
+*.pt
+*.pth
+*.onnx
+*.h5
+ml/data/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store

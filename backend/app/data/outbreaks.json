@@ -1,0 +1,65 @@
+[
+  {
+    "id": "sample-1",
+    "postal_prefix": "L1H",
+    "crop": "tomato",
+    "label": "tomato_late_blight",
+    "report_count": 6,
+    "reported_on": "2026-10-28",
+    "note": "Sample data for development. Not a real report."
+  },
+  {
+    "id": "sample-2",
+    "postal_prefix": "L1G",
+    "crop": "tomato",
+    "label": "tomato_early_blight",
+    "report_count": 3,
+    "reported_on": "2026-10-23",
+    "note": "Sample data for development. Not a real report."
+  },
+  {
+    "id": "sample-3",
+    "postal_prefix": "M4E",
+    "crop": "tomato",
+    "label": "tomato_septoria_leaf_spot",
+    "report_count": 4,
+    "reported_on": "2026-10-20",
+    "note": "Sample data for development. Not a real report."
+  },
+  {
+    "id": "sample-4",
+    "postal_prefix": "N1G",
+    "crop": "apple",
+    "label": "apple_scab",
+    "report_count": 5,
+    "reported_on": "2026-10-25",
+    "note": "Sample data for development. Not a real report."
+  },
+  {
+    "id": "sample-5",
+    "postal_prefix": "K1A",
+    "crop": "apple",
+    "label": "apple_cedar_rust",
+    "report_count": 2,
+    "reported_on": "2026-10-17",
+    "note": "Sample data for development. Not a real report."
+  },
+  {
+    "id": "sample-6",
+    "postal_prefix": "N6A",
+    "crop": "corn",
+    "label": "corn_northern_leaf_blight",
+    "report_count": 7,
+    "reported_on": "2026-10-27",
+    "note": "Sample data for development. Not a real report."
+  },
+  {
+    "id": "sample-7",
+    "postal_prefix": "L1H",
+    "crop": "apple",
+    "label": "apple_scab",
+    "report_count": 2,
+    "reported_on": "2026-10-12",
+    "note": "Sample data for development. Not a real report."
+  }
+]

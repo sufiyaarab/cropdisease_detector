@@ -1,0 +1,419 @@
+{
+  "tomato_healthy": {
+    "summary": "No disease or pest signs found. Keep up your normal care.",
+    "steps": [
+      {
+        "title": "Water at the base",
+        "detail": "Water the soil in the morning and keep leaves dry. Wet leaves help most leaf diseases spread.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "tomato_early_blight": {
+    "summary": "A common fungal leaf disease that starts on older, lower leaves.",
+    "steps": [
+      {
+        "title": "Remove affected leaves",
+        "detail": "Cut off leaves that show symptoms and put them in the garbage, not the compost.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Water at the base",
+        "detail": "Water the soil in the morning and keep leaves dry. Wet leaves help most leaf diseases spread.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Give plants more air",
+        "detail": "Space, stake or prune plants so leaves dry quickly after rain.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Mulch the soil",
+        "detail": "Cover bare soil under the plant so rain does not splash soil onto the leaves.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Rotate next year",
+        "detail": "Do not plant the same crop family in the same spot for two to three years.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "tomato_late_blight": {
+    "summary": "A fast-spreading disease in cool, wet weather. Act quickly.",
+    "steps": [
+      {
+        "title": "Act the same day",
+        "detail": "Late blight can move through a garden in days. Remove badly affected plants, bag them and put them in the garbage.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Water at the base",
+        "detail": "Water the soil in the morning and keep leaves dry. Wet leaves help most leaf diseases spread.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Give plants more air",
+        "detail": "Space, stake or prune plants so leaves dry quickly after rain.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Tell your neighbours",
+        "detail": "Late blight spreads on the wind to nearby tomatoes and potatoes.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "tomato_septoria_leaf_spot": {
+    "summary": "A fungal disease that causes many small round spots on lower leaves.",
+    "steps": [
+      {
+        "title": "Remove affected leaves",
+        "detail": "Cut off leaves that show symptoms and put them in the garbage, not the compost.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Water at the base",
+        "detail": "Water the soil in the morning and keep leaves dry. Wet leaves help most leaf diseases spread.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Give plants more air",
+        "detail": "Space, stake or prune plants so leaves dry quickly after rain.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Clean up in the fall",
+        "detail": "Remove fallen leaves and old plant material at the end of the season.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Rotate next year",
+        "detail": "Do not plant the same crop family in the same spot for two to three years.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "tomato_spider_mites": {
+    "summary": "Tiny mites that feed under leaves in hot, dry weather.",
+    "steps": [
+      {
+        "title": "Spray with water",
+        "detail": "A firm spray of water under the leaves knocks mites off. Repeat every few days.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Keep plants watered",
+        "detail": "Mites do the most damage on plants that are short of water.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "apple_healthy": {
+    "summary": "No disease or pest signs found. Keep up your normal care.",
+    "steps": [
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "apple_scab": {
+    "summary": "A fungal disease that causes dark, scabby spots on leaves and fruit.",
+    "steps": [
+      {
+        "title": "Rake up fallen leaves",
+        "detail": "The fungus survives winter on fallen leaves. Rake and remove them in the fall.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Prune for air flow",
+        "detail": "Open up the canopy in late winter so leaves dry faster.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "apple_cedar_rust": {
+    "summary": "A fungal disease that needs both apple and juniper (red cedar) to complete its life cycle.",
+    "steps": [
+      {
+        "title": "Look for nearby junipers",
+        "detail": "Orange galls on nearby junipers are the source. Remove the galls in late winter where you can.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Prune for air flow",
+        "detail": "Open up the canopy in late winter so leaves dry faster.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "apple_black_rot": {
+    "summary": "A fungal disease that causes leaf spots with a purple edge and rots fruit.",
+    "steps": [
+      {
+        "title": "Prune out dead wood",
+        "detail": "Remove dead branches and dried-up fruit left on the tree. This is where the fungus lives.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Clean up in the fall",
+        "detail": "Remove fallen leaves and old plant material at the end of the season.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "corn_healthy": {
+    "summary": "No disease or pest signs found. Keep up your normal care.",
+    "steps": [
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "corn_northern_leaf_blight": {
+    "summary": "A fungal disease that causes long, cigar-shaped grey-green lesions.",
+    "steps": [
+      {
+        "title": "Clean up in the fall",
+        "detail": "Remove fallen leaves and old plant material at the end of the season.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Rotate next year",
+        "detail": "Do not plant the same crop family in the same spot for two to three years.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Choose resistant varieties",
+        "detail": "Next season, look for varieties listed as resistant to northern leaf blight.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "corn_common_rust": {
+    "summary": "A fungal disease that causes small rust-coloured pustules on both sides of the leaf.",
+    "steps": [
+      {
+        "title": "Usually no action needed",
+        "detail": "Light rust late in the season rarely reduces yield in a home garden.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Choose resistant varieties",
+        "detail": "Next season, look for varieties listed as resistant to rust.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  },
+  "corn_gray_leaf_spot": {
+    "summary": "A fungal disease that causes narrow rectangular lesions between leaf veins.",
+    "steps": [
+      {
+        "title": "Clean up in the fall",
+        "detail": "Remove fallen leaves and old plant material at the end of the season.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Rotate next year",
+        "detail": "Do not plant the same crop family in the same spot for two to three years.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Give plants more air",
+        "detail": "Space, stake or prune plants so leaves dry quickly after rain.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      },
+      {
+        "title": "Check again in a week",
+        "detail": "Take a new photo in about 7 days to see whether the problem is spreading.",
+        "kind": "practice",
+        "source": "General garden practice. Draft: check against OMAFRA guidance before release.",
+        "legal_check": true,
+        "suitability_check": false
+      }
+    ]
+  }
+}
