@@ -1,0 +1,36 @@
+{
+  "_help": [
+    "One entry per Roboflow Universe dataset. Copy workspace / project / version from the dataset URL:",
+    "https://universe.roboflow.com/<workspace>/<project>/dataset/<version>",
+    "format: 'folder' for classification datasets, 'yolov8' for object detection (each box is cut out as a leaf photo).",
+    "class_map: Roboflow class name -> our label (configs/classes.json). Classes not listed are skipped.",
+    "Map leaves of plants we don't support (pepper, potato, grape, ...) to other_plant: they teach the plant head.",
+    "Run with --list-classes first to see the dataset's class names, then fill class_map.",
+    "Set enabled to true when an entry is filled in."
+  ],
+  "datasets": [
+    {
+      "enabled": false,
+      "workspace": "FILL-ME",
+      "project": "FILL-ME",
+      "version": 1,
+      "format": "yolov8",
+      "class_map": {
+        "Tomato leaf": "tomato_healthy",
+        "Tomato Early blight leaf": "tomato_early_blight",
+        "Tomato leaf late blight": "tomato_late_blight",
+        "Tomato Septoria leaf spot": "tomato_septoria_leaf_spot",
+        "Tomato two spotted spider mites leaf": "tomato_spider_mites",
+        "Apple leaf": "apple_healthy",
+        "Apple Scab Leaf": "apple_scab",
+        "Apple rust leaf": "apple_cedar_rust",
+        "Corn leaf blight": "corn_northern_leaf_blight",
+        "Corn rust leaf": "corn_common_rust",
+        "Corn Gray leaf spot": "corn_gray_leaf_spot",
+        "Bell_pepper leaf": "other_plant",
+        "Potato leaf": "other_plant",
+        "grape leaf": "other_plant"
+      }
+    }
+  ]
+}

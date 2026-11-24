@@ -19,6 +19,9 @@ class Settings:
     # Below this calibrated confidence the app says "not sure" (Report 2, final concept).
     confidence_threshold: float = _float("CONFIDENCE_THRESHOLD", 0.70)
     model_version: str = os.getenv("MODEL_VERSION", "stub-0.1")
+    # The trained model: a folder made by ml/src/train.py (model.tflite + classes/calibration/preprocess json).
+    use_stub_model: bool = os.getenv("USE_STUB_MODEL", "true").lower() == "true"
+    model_dir: str = os.getenv("MODEL_DIR", "")
     # Local development only: creates a ready-made account at start-up. Set to false in production.
     seed_demo_user: bool = os.getenv("SEED_DEMO_USER", "true").lower() == "true"
 

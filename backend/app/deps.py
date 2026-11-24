@@ -9,7 +9,18 @@ from app.store import Store
 store = Store()
 if settings.seed_demo_user:
     store.seed_demo_user()
-model: Classifier = StubClassifier(version=settings.model_version)
+
+
+def load_model() -> Classifier:
+    """The trained model when MODEL_DIR is set and USE_STUB_MODEL=false, otherwise the stub."""
+    if not settings.use_stub_model and settings.model_dir:
+        from app.pipeline.tflite_model import TFLiteClassifier
+
+        return TFLiteClassifier(settings.model_dir)
+    return StubClassifier(version=settings.model_version)
+
+
+model: Classifier = load_model()
 
 
 def get_store() -> Store:
