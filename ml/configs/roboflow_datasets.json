@@ -15,7 +15,7 @@
       "enabled": true,
       "workspace": "plant-disease-detection",
       "project": "fieldplant",
-      "version": 1,
+      "version": 11,
       "format": "coco",
       "class_map": {
         "Tomato_healthy": "tomato_healthy",
@@ -32,7 +32,7 @@
       "enabled": true,
       "workspace": "nick-speer-ofaik",
       "project": "plantdoc-dxufs",
-      "version": 1,
+      "version": 8,
       "format": "coco",
       "class_map": {
         "Tomato leaf": "tomato_healthy",
