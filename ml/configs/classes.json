@@ -1,0 +1,9 @@
+{
+  "_note": "Must match backend/app/pipeline/classes.py exactly (labels and order). See contracts/model_io.md.",
+  "plant": ["tomato", "apple", "corn", "other_plant"],
+  "disease": {
+    "tomato": ["tomato_healthy", "tomato_early_blight", "tomato_late_blight", "tomato_septoria_leaf_spot", "tomato_spider_mites"],
+    "apple": ["apple_healthy", "apple_scab", "apple_cedar_rust", "apple_black_rot"],
+    "corn": ["corn_healthy", "corn_northern_leaf_blight", "corn_common_rust", "corn_gray_leaf_spot"]
+  }
+}

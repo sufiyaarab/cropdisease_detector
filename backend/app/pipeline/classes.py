@@ -35,4 +35,8 @@ CLASSES: dict[str, list[ClassInfo]] = {
     ],
 }
 
+# The model's plant head: which plant is in the photo. Order is part of the contract too.
+# "other_plant" = a plant the app doesn't support yet.
+PLANT_CLASSES: list[str] = [*CLASSES, "other_plant"]
+
 BY_LABEL: dict[str, ClassInfo] = {c.label: c for items in CLASSES.values() for c in items}

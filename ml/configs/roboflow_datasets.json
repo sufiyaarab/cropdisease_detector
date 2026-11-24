@@ -1,0 +1,67 @@
+{
+  "_help": [
+    "One entry per Roboflow Universe dataset. Copy workspace / project / version from the dataset URL:",
+    "https://universe.roboflow.com/<workspace>/<project>/dataset/<version>",
+    "format: 'coco' or 'yolov8' for object detection (each leaf box is cut out as its own photo), 'folder' for classification.",
+    "class_map: Roboflow class name -> our label (configs/classes.json). Classes not listed are skipped.",
+    "Map leaves of plants we don't support (pepper, potato, grape, ...) to other_plant: they teach the plant head.",
+    "Don't map diseases we don't support on our crops (e.g. tomato mosaic) to anything: leave them out.",
+    "Run with --list-classes first to see the dataset's exact class names, then fix class_map.",
+    "Set enabled to true when an entry is filled in."
+  ],
+  "datasets": [
+    {
+      "name": "FieldPlant (field photos, CC BY 4.0). Use the workspace/project/version from your old download_data.py",
+      "enabled": true,
+      "workspace": "plant-disease-detection",
+      "project": "fieldplant",
+      "version": 11,
+      "format": "coco",
+      "class_map": {
+        "Tomato_healthy": "tomato_healthy",
+        "Tomato_Mildiou": "tomato_late_blight",
+        "Corn_Healthy": "corn_healthy",
+        "Corn Healthy": "corn_healthy",
+        "Corn_Blight": "corn_northern_leaf_blight",
+        "Corn_Rust": "corn_common_rust",
+        "Corn_Cercosporiose": "corn_gray_leaf_spot"
+      }
+    },
+    {
+      "name": "PlantDoc (field and web photos, CC BY 4.0)",
+      "enabled": true,
+      "workspace": "nick-speer-ofaik",
+      "project": "plantdoc-dxufs",
+      "version": 8,
+      "format": "coco",
+      "class_map": {
+        "Tomato leaf": "tomato_healthy",
+        "Tomato Early blight leaf": "tomato_early_blight",
+        "Tomato leaf late blight": "tomato_late_blight",
+        "Tomato Septoria leaf spot": "tomato_septoria_leaf_spot",
+        "Tomato two spotted spider mites leaf": "tomato_spider_mites",
+        "Apple leaf": "apple_healthy",
+        "Apple Scab Leaf": "apple_scab",
+        "Apple rust leaf": "apple_cedar_rust",
+        "Corn leaf blight": "corn_northern_leaf_blight",
+        "Corn rust leaf": "corn_common_rust",
+        "Corn Gray leaf spot": "corn_gray_leaf_spot",
+        "Bell_pepper leaf": "other_plant",
+        "Bell_pepper leaf spot": "other_plant",
+        "Potato leaf": "other_plant",
+        "Potato leaf early blight": "other_plant",
+        "Potato leaf late blight": "other_plant",
+        "grape leaf": "other_plant",
+        "grape leaf black rot": "other_plant",
+        "Strawberry leaf": "other_plant",
+        "Squash Powdery mildew leaf": "other_plant",
+        "Blueberry leaf": "other_plant",
+        "Cherry leaf": "other_plant",
+        "Peach leaf": "other_plant",
+        "Raspberry leaf": "other_plant",
+        "Soyabean leaf": "other_plant",
+        "Soybean leaf": "other_plant"
+      }
+    }
+  ]
+}

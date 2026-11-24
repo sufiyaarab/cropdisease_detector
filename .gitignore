@@ -26,3 +26,10 @@ ml/data/
 .vscode/
 .idea/
 .DS_Store
+
+# Trained models (folder made by ml/src/train.py) and datasets
+backend/models/
+*.tflite
+*.keras
+data/
+ml/artifacts/
