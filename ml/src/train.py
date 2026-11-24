@@ -21,6 +21,7 @@ Outputs (contracts/model_io.md): model.tflite, model.keras, classes.json,
 calibration.json, preprocess.json, metrics.json, splits.json.
 """
 import argparse
+import hashlib
 import json
 import random
 import time
@@ -44,9 +45,22 @@ def load_classes():
     return raw, heads
 
 
+def group_key(path: str) -> str:
+    """Photos that must stay in the same split. Roboflow leaf crops are named rf_<dataset>__<photo>__<n>.jpg,
+    so all leaves of one field photo share a key. Anything else is its own group."""
+    name = Path(path).stem
+    return name.rsplit("__", 1)[0] if name.startswith("rf_") and name.count("__") >= 2 else name
+
+
+def split_of(path: str, val: float, test: float) -> str:
+    # Deterministic: a photo lands in the same split every run and across label folders.
+    h = int(hashlib.md5(group_key(path).encode()).hexdigest()[:8], 16) / 2**32
+    return "test" if h < test else "val" if h < test + val else "train"
+
+
 def list_split(data: Path, raw: dict, val=0.15, test=0.15):
-    """Stratified split per label folder. Returns {split: [(path, {head: target or -1}), ...]}."""
-    rng = random.Random(SEED)
+    """About 70/15/15 per label folder, split by photo group (see group_key).
+    Returns {split: [(path, {head: target or -1}), ...]}."""
     heads = ["plant", *raw["disease"]]
     folders = [(lab, crop, i) for crop, labels in raw["disease"].items() for i, lab in enumerate(labels)]
     folders.append((OTHER, None, None))
@@ -59,11 +73,11 @@ def list_split(data: Path, raw: dict, val=0.15, test=0.15):
         target["plant"] = raw["plant"].index(crop) if crop else raw["plant"].index(OTHER)
         if crop:
             target[crop] = idx
-        rng.shuffle(files)
-        n_val, n_test = int(len(files) * val), int(len(files) * test)
-        out["test"] += [(f, target) for f in files[:n_test]]
-        out["val"] += [(f, target) for f in files[n_test:n_test + n_val]]
-        out["train"] += [(f, target) for f in files[n_test + n_val:]]
+        for f in files:
+            out[split_of(f, val, test)].append((f, target))
+    rng = random.Random(SEED)
+    for items in out.values():
+        rng.shuffle(items)
     return out
 
 
@@ -320,7 +334,7 @@ def main():
         "version": args.version,
         "data_sources": {"pv": "PlantVillage (lab photos)", "rf": "Roboflow Universe (field photos)"},
         "sources_used": sources,
-        "split": "random 70/15/15 per label folder, seed 42 (splits.json)",
+        "split": "about 70/15/15 by photo (all leaves of one field photo in the same split), see splits.json",
         "warning": "PlantVillage test images are lab photos like the training ones, so overall scores are much higher "
                    "than field accuracy. Trust field_photos_only when it is there.",
         "training": {"head_epochs": args.epochs, "fine_tune_epochs": args.fine_tune_epochs,

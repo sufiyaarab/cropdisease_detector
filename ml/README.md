@@ -35,8 +35,12 @@ which disease on it. Every photo trains the plant head; a photo only trains its 
 
 1. Push this folder to the team repo.
 2. Fill `configs/roboflow_datasets.json`: for each dataset, copy workspace, project and version from its URL
-   `https://universe.roboflow.com/<workspace>/<project>/dataset/<version>`, set `format` (`folder` for classification,
-   `yolov8` for object detection), set `enabled: true`. Push.
+   `https://universe.roboflow.com/<workspace>/<project>/dataset/<version>`, set `format` (`coco` or `yolov8` for object
+   detection, `folder` for classification), set `enabled: true`. Push. FieldPlant and PlantDoc entries are already there.
+
+   For detection exports, each mapped leaf box is cropped into its own photo. Roboflow's augmented copies of a photo are
+   merged back to one, and every leaf from the same photo stays in the same train/val/test split, so the test score
+   isn't inflated by near-copies.
 3. Open `notebooks/train_colab.ipynb`:
    - **VS Code (Colab extension):** open the file, Select Kernel > Colab > New Colab Server > GPU. The code runs on Colab's
      machine, so the notebook clones the repo there (push first).
