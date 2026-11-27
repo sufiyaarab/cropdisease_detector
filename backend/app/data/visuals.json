@@ -1,0 +1,68 @@
+{
+  "_note": "Content for the result page pictures. 'look' drives the frontend leaf drawings (frontend/src/components/LeafDrawing.tsx). examples = captions for [close-up, whole leaf, where on the plant]. stages = [early, spreading, severe]. Draft text: check against OMAFRA guidance and swap drawings for licensed photos before release.",
+  "tomato_healthy": {
+    "look": {"leaf": "tomato", "lesion": "none", "where": "all"},
+    "examples": ["Even green colour, no spots", "Leaf edges flat, not curled or dry", "Lower leaves as green as the top ones"],
+    "stages": []
+  },
+  "tomato_early_blight": {
+    "look": {"leaf": "tomato", "lesion": "ring", "where": "lower"},
+    "examples": ["Brown spots with rings, like a target", "Yellow skin around the spots", "Starts on the lowest, oldest leaves"],
+    "stages": ["A few small brown spots on low leaves", "Ringed spots with yellow skin on more leaves", "Spots join, leaves yellow and drop"]
+  },
+  "tomato_late_blight": {
+    "look": {"leaf": "tomato", "lesion": "blotch", "where": "all"},
+    "examples": ["Large dark, greasy-looking patches", "Pale edge, white fuzz underneath in damp weather", "Can hit any leaf and the stems"],
+    "stages": ["Pale, water-soaked patches", "Large brown patches spreading fast", "Leaves and stems collapse"]
+  },
+  "tomato_septoria_leaf_spot": {
+    "look": {"leaf": "tomato", "lesion": "smallspot", "where": "lower"},
+    "examples": ["Many small round spots with a dark edge", "Light grey centres with tiny black dots", "Starts on the lowest leaves"],
+    "stages": ["A few small spots on low leaves", "Many spots, leaves turn yellow", "Lower leaves drop, spots move up"]
+  },
+  "tomato_spider_mites": {
+    "look": {"leaf": "tomato", "lesion": "stipple", "where": "all"},
+    "examples": ["Tiny pale speckles all over the leaf", "Leaf looks dusty and yellow-bronze", "Fine webbing under leaves, worst in hot dry weather"],
+    "stages": ["A few pale speckles", "Dusty yellow leaves, fine webbing", "Leaves bronze, dry out and drop"]
+  },
+  "apple_healthy": {
+    "look": {"leaf": "apple", "lesion": "none", "where": "all"},
+    "examples": ["Even green colour, no spots", "Glossy top, no rough patches", "Leaves stay on the tree all summer"],
+    "stages": []
+  },
+  "apple_scab": {
+    "look": {"leaf": "apple", "lesion": "velvet", "where": "all"},
+    "examples": ["Olive-green, velvety spots", "Spots turn dark with a feathery edge", "Young leaves in spring are hit first"],
+    "stages": ["Small olive-green spots", "Dark spots, leaves curl", "Leaves yellow and drop early"]
+  },
+  "apple_cedar_rust": {
+    "look": {"leaf": "apple", "lesion": "rust", "where": "all"},
+    "examples": ["Bright yellow-orange spots", "Spots get a red edge as they grow", "Needs a nearby juniper (red cedar) to spread"],
+    "stages": ["Small yellow spots", "Orange spots with a red edge", "Tiny tubes under the spots, leaves drop"]
+  },
+  "apple_black_rot": {
+    "look": {"leaf": "apple", "lesion": "frogeye", "where": "all"},
+    "examples": ["Tan centre with a purple edge, like a frog's eye", "Spots may grow in rings", "Also rots the fruit"],
+    "stages": ["Small purple specks", "Frog-eye spots with tan centres", "Spots grow, leaves yellow and drop"]
+  },
+  "corn_healthy": {
+    "look": {"leaf": "corn", "lesion": "none", "where": "all"},
+    "examples": ["Even green colour along the leaf", "No streaks or powdery spots", "Lower leaves still green"],
+    "stages": []
+  },
+  "corn_northern_leaf_blight": {
+    "look": {"leaf": "corn", "lesion": "cigar", "where": "lower"},
+    "examples": ["Long, cigar-shaped grey-green to tan spots", "Spots can be longer than your finger", "Starts on lower leaves, moves up"],
+    "stages": ["A few small grey-green streaks", "Long tan cigar shapes on several leaves", "Spots join, leaves die back"]
+  },
+  "corn_common_rust": {
+    "look": {"leaf": "corn", "lesion": "pustule", "where": "all"},
+    "examples": ["Small rust-brown bumps on both sides", "Bumps rub off as powder", "Found on any leaf"],
+    "stages": ["A few rusty bumps", "Many bumps across the leaf", "Leaves yellow and dry out"]
+  },
+  "corn_gray_leaf_spot": {
+    "look": {"leaf": "corn", "lesion": "rect", "where": "lower"},
+    "examples": ["Narrow, boxy grey-tan spots", "Spots stop at the leaf veins", "Starts on lower leaves in humid weather"],
+    "stages": ["Small tan spots with yellow edges", "Long boxy grey spots between veins", "Spots join, whole leaves turn grey"]
+  }
+}

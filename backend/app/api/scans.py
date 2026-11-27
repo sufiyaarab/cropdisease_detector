@@ -9,12 +9,16 @@ from fastapi.responses import Response
 from app.config import settings
 from app.deps import current_user, get_model, get_store
 from app.errors import AppError
+from app.pipeline.classes import CLASSES
 from app.pipeline.diagnose import diagnose
+from app.pipeline.explain import occlusion_map
 from app.pipeline.model import Classifier
+from app.pipeline.severity import estimate, level_for
 from app.pipeline.validate import check_photo, to_stored_jpeg
-from app.schemas import Crop, PhotoIssue, ScanResult
+from app.schemas import Attention, Crop, PhotoIssue, ScanResult, Severity, SpotBox
 from app.store import Store
 from app.treatment.engine import build_care_plan
+from app.treatment.visuals import get_visuals
 
 router = APIRouter(prefix="/scans", tags=["scans"])
 CROPS = get_args(Crop)
@@ -70,9 +74,16 @@ async def create_scan(
     result.candidates = found.candidates
     result.model_version = model.version
 
-    # 4. Care plan only when the model is confident enough.
+    # 4. Care plan, pictures and severity only when the model is confident enough.
     if found.status == "diagnosed":
         result.care_plan = build_care_plan(found.top.label)
+        result.visuals = get_visuals(found.top.label)
+        result.severity = estimate_severity(images, has_disease=found.top.category != "healthy")
+        if settings.show_attention and found.top.category != "healthy":
+            index = result.severity.photo_index
+            class_index = [c.label for c in CLASSES[crop]].index(found.top.label)
+            grid = occlusion_map(model, images[index], crop, class_index)
+            result.attention = Attention(photo_index=index, grid=grid)
 
     # 5. Link to a saved plant and flag a change in condition.
     if plant_id is not None:
@@ -83,6 +94,19 @@ async def create_scan(
 
     store.save_scan(user["id"], result, [to_stored_jpeg(img) for img in images])
     return result
+
+
+def estimate_severity(images: list, has_disease: bool) -> Severity:
+    """Uses the photo with the most spots, so a problem is not played down."""
+    estimates = [estimate(img) for img in images]
+    worst = max(range(len(estimates)), key=lambda i: estimates[i].leaf_pct)
+    found = estimates[worst]
+    return Severity(
+        leaf_pct=found.leaf_pct,
+        level=level_for(found.leaf_pct, has_disease),
+        photo_index=worst,
+        spots=[SpotBox(x=round(s.x, 4), y=round(s.y, 4), w=round(s.w, 4), h=round(s.h, 4)) for s in found.spots],
+    )
 
 
 @router.get("/{scan_id}", response_model=ScanResult)
