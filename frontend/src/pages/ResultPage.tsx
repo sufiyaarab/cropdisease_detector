@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { api, ApiError } from "../api/client";
 import type { ScanResult } from "../api/types";
+import { ExamplesCard, SeverityCard, SpotPhoto, StageStrip } from "../components/DiseaseVisuals";
 import { CarePlanCard, CategoryBadge, ConfidenceBar, LoadState, Notice, ScanPhoto, Stepper } from "../components/ui";
 import { useLoad } from "../lib/useLoad";
 import { validatePlantName } from "../lib/validation";
@@ -52,7 +53,9 @@ export function ResultPage() {
   return (
     <>
       <Stepper current={scan.status === "diagnosed" ? 4 : 3} />
-      <ScanPhoto scanId={scan.id} alt="The photo you scanned" />
+      {scan.status === "diagnosed" && scan.severity
+        ? <SpotPhoto scanId={scan.id} severity={scan.severity} attention={scan.attention} />
+        : <ScanPhoto scanId={scan.id} alt="The photo you scanned" />}
 
       {scan.status === "diagnosed" && scan.top && (
         <>
@@ -70,6 +73,9 @@ export function ResultPage() {
               </details>
             )}
           </section>
+          {scan.severity && <SeverityCard scanId={scan.id} severity={scan.severity} isHealthy={scan.top.category === "healthy"} />}
+          {scan.visuals && <ExamplesCard visuals={scan.visuals} name={scan.top.display_name} />}
+          {scan.visuals && scan.severity && scan.top.category !== "healthy" && <StageStrip visuals={scan.visuals} level={scan.severity.level} />}
           {scan.care_plan && <CarePlanCard plan={scan.care_plan} />}
         </>
       )}
