@@ -18,6 +18,11 @@ class Settings:
     )
     # Below this calibrated confidence the app says "not sure" (Report 2, final concept).
     confidence_threshold: float = _float("CONFIDENCE_THRESHOLD", 0.70)
+    # Photos with several leaves: also check overlapping close-up tiles, so a small sick leaf isn't lost when the
+    # whole photo is shrunk to 224 px. Needs the trained model (it uses the plant head to skip tiles without the crop).
+    tile_scan: bool = os.getenv("TILE_SCAN", "true").lower() == "true"
+    tile_grid: int = _int("TILE_GRID", 3)  # 3 = 3 x 3 tiles, each half the photo's width and height
+    tile_min_plant: float = _float("TILE_MIN_PLANT", 0.50)  # a tile counts only if the plant head sees the crop
     model_version: str = os.getenv("MODEL_VERSION", "stub-0.1")
     # The trained model: a folder made by ml/src/train.py (model.tflite + classes/calibration/preprocess json).
     use_stub_model: bool = os.getenv("USE_STUB_MODEL", "true").lower() == "true"

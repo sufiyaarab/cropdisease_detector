@@ -21,4 +21,6 @@ for module in (auth, scans, plants, outbreaks):
 
 @app.get("/health", tags=["health"])
 def health() -> dict:
-    return {"status": "ok", "model_version": get_model().version, "threshold": settings.confidence_threshold}
+    model = get_model()
+    return {"status": "ok", "model_version": model.version, "threshold": settings.confidence_threshold,
+            "healthy_threshold": getattr(model, "healthy_threshold", {}), "tile_scan": settings.tile_scan}

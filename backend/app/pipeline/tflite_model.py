@@ -33,7 +33,11 @@ class TFLiteClassifier:
             got = classes.get("disease", {}).get(crop)
             if got != expected:
                 raise ModelContractError(f"{model_dir}: classes for '{crop}' are {got}, the app expects {expected}")
-        self.temperature: dict[str, float] = json.loads((model_dir / "calibration.json").read_text())["temperature"]
+        calibration = json.loads((model_dir / "calibration.json").read_text())
+        self.temperature: dict[str, float] = calibration["temperature"]
+        # Per crop: say "healthy" only at or above this calibrated confidence (missing a disease costs more
+        # than a false alarm). Older model folders don't have it; diagnose() then uses CONFIDENCE_THRESHOLD.
+        self.healthy_threshold: dict[str, float] = calibration.get("healthy_threshold", {})
         pre = json.loads((model_dir / "preprocess.json").read_text())
         self.size = tuple(pre["input_size"])
         metrics_file = model_dir / "metrics.json"
@@ -54,6 +58,13 @@ class TFLiteClassifier:
         if crop not in CLASSES:
             raise ValueError(f"Unsupported crop: {crop}")
         return softmax(self.logits(image)[crop], self.temperature[crop])
+
+    def predict_with_plant(self, image: Image.Image, crop: str) -> tuple[np.ndarray, np.ndarray]:
+        """Disease probabilities for `crop` and plant probabilities, from one model run (used for leaf tiles)."""
+        if crop not in CLASSES:
+            raise ValueError(f"Unsupported crop: {crop}")
+        out = self.logits(image)
+        return softmax(out[crop], self.temperature[crop]), softmax(out["plant"], self.temperature["plant"])
 
     def predict_plant(self, image: Image.Image) -> np.ndarray:
         """Which plant this is, in PLANT_CLASSES order (tomato, apple, corn, other_plant).

@@ -34,6 +34,19 @@ def test_real_model_returns_probabilities_in_contract_order():
     plant = model.predict_plant(img)
     assert plant.shape == (len(PLANT_CLASSES),)
     assert abs(plant.sum() - 1) < 1e-5
+    disease, plant2 = model.predict_with_plant(img, "tomato")
+    assert np.allclose(disease, model.predict(img, "tomato")) and np.allclose(plant2, plant)
+    assert all(0.0 <= t <= 1.0 for t in model.healthy_threshold.values())
+
+
+@pytest.mark.skipif(not os.getenv("TEST_MODEL_DIR"), reason="set TEST_MODEL_DIR to a trained model folder")
+def test_real_model_with_leaf_tiles():
+    from app.pipeline.diagnose import diagnose
+
+    model = TFLiteClassifier(os.environ["TEST_MODEL_DIR"])
+    img = Image.fromarray(np.random.default_rng(1).integers(0, 255, (800, 800, 3), dtype=np.uint8))
+    found = diagnose([img], "tomato", model, 0.70, tile_grid=3)
+    assert found.status in {"diagnosed", "not_sure"} and len(found.candidates) == 3
 
 
 def test_rejects_model_without_plant_head(tmp_path):

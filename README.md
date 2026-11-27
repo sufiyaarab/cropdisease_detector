@@ -31,7 +31,10 @@ npm install
 npm run dev                      # http://localhost:5173
 ```
 
-Open http://localhost:5173, create an account (any email, 8+ character password) and scan a leaf photo.
+Open http://localhost:5173 and tap **Log in as demo user** (`demo@example.com` / `demo-password`), or create your own account, then scan a leaf photo.
+Accounts and saved plants are wiped whenever the backend restarts; the demo account is recreated each time.
+
+**Windows notes:** activate the environment with `.venv\Scripts\activate` instead of the `source` line. If `npm` is "not recognized", install Node.js LTS from nodejs.org and open a new terminal. http://localhost:8000 shows a 404 on purpose; use http://localhost:8000/docs.
 To test on a phone, run `npm run dev -- --host` and set `VITE_API_BASE_URL` and `ALLOWED_ORIGINS` to your laptop's network address.
 
 ## Run the tests
