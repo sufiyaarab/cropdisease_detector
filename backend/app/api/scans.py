@@ -63,7 +63,8 @@ async def create_scan(
         return result
 
     # 3. AI analysis, then the confidence threshold.
-    found = diagnose(images, crop, model, settings.confidence_threshold)
+    found = diagnose(images, crop, model, settings.confidence_threshold,
+                     tile_grid=settings.tile_grid if settings.tile_scan else 0, tile_min_plant=settings.tile_min_plant)
     result.status = found.status
     result.top = found.top
     result.candidates = found.candidates
