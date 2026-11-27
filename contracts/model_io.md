@@ -36,12 +36,17 @@ Probabilities = softmax(logits / T), with T per head from `calibration.json`.
 | --- | --- |
 | `model.tflite` | EfficientNet-B0 with the plant head and three crop heads (outputs named plant / tomato / apple / corn, logits). Made by `ml/src/train.py`, loaded by `backend/app/pipeline/tflite_model.py` |
 | `classes.json` | `plant` list and `disease` lists per crop, same order as the outputs |
-| `calibration.json` | Temperature per head (plant, tomato, apple, corn) |
+| `calibration.json` | `temperature` per head (plant, tomato, apple, corn); `healthy_threshold` per crop (optional, v0.2+) |
 | `preprocess.json` | Input size, mean and standard deviation |
-| `metrics.json` | Macro-F1 and per-class scores on the test set |
+| `metrics.json` | Per head: precision, recall, F1, F2 per class, missed-disease and false-alarm rates, on field photos and per source |
 
 ## Rules
 
 1. Changing a label or the order of a class list (disease or plant) is a contract change. Update `classes.py`, `ml/configs/classes.json`, the treatment data and this file in one pull request. Adding a supported crop means: new disease list, insert it in `plant` before `other_plant`, retrain.
-2. The backend marks a result "not sure" when the top probability is under 0.70 (`CONFIDENCE_THRESHOLD`).
-3. Tier 2: the YOLOv8n leaf detector crops the photo **before** `predict`. This interface does not change.
+2. The backend marks a result "not sure" when the top probability is under 0.70 (`CONFIDENCE_THRESHOLD`), or when
+   the top class is healthy and its probability is under the crop's `healthy_threshold` (a missed disease costs more
+   than a false alarm). Model folders without `healthy_threshold` use 0.70 for healthy too.
+3. Photos with several leaves: with `TILE_SCAN=true` the backend also runs the model on overlapping half-size tiles
+   (`predict_with_plant`, one model run gives both the crop head and the plant head) and keeps a tile's answer only
+   when the plant head sees the crop and the tile shows a disease at ≥ 0.70.
+4. Tier 2: the YOLOv8n leaf detector crops the photo **before** `predict`. This interface does not change.
