@@ -31,5 +31,9 @@ ml/data/
 backend/models/
 *.tflite
 *.keras
-data/
+# Training data at the repo root only (not backend/app/data, which the app needs)
+/data/
+/scenes/
+/roboflow_downloads/
+scenes_eval.json
 ml/artifacts/

@@ -24,6 +24,8 @@ class Settings:
     model_dir: str = os.getenv("MODEL_DIR", "")
     # Local development only: creates a ready-made account at start-up. Set to false in production.
     seed_demo_user: bool = os.getenv("SEED_DEMO_USER", "true").lower() == "true"
+    # "Where the model looked" heatmap on disease results: 49 extra model runs per scan.
+    show_attention: bool = os.getenv("SHOW_ATTENTION", "true").lower() == "true"
 
     # Photo validation limits. Tune these with real field photos.
     max_photos: int = _int("MAX_PHOTOS", 3)

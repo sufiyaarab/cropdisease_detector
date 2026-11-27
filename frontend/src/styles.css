@@ -115,3 +115,56 @@ summary { cursor: pointer; min-height: 44px; display: flex; align-items: center;
 @media (prefers-reduced-motion: no-preference) {
   .bar-fill { transition: width 0.4s ease; }
 }
+
+/* Disease pictures and severity (components/DiseaseVisuals.tsx, pages/SeverityPage.tsx) */
+.stack-sm { display: flex; flex-direction: column; gap: 0.5rem; }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.card-head h2 { margin: 0; }
+.grow { flex: 1; }
+.btn-small { width: auto; min-height: 44px; padding: 0.25rem 0.75rem; }
+.spot-photo { padding: 0; overflow: hidden; }
+.spot-frame { position: relative; overflow: hidden; display: block; width: fit-content; max-width: 100%; margin: 0 auto; line-height: 0; }
+.spot-frame img { display: block; max-width: 100%; max-height: 320px; width: auto; height: auto; }
+.spot-ring { position: absolute; border: 2px dashed #1a73e8; border-radius: 50%; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8); pointer-events: none; }
+.spot-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 1rem; margin: 0; border-top: 1px solid var(--line); }
+.spot-key { width: 18px; height: 18px; border-radius: 50%; border: 2px dashed #1a73e8; flex-shrink: 0; }
+.severity-line { margin: 0; }
+.level-none { color: var(--green-dark); }
+.level-mild { color: #6b4e00; }
+.level-moderate { color: #8a4b00; }
+.level-severe { color: #8a1d16; }
+.meter-bars, .meter-labels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.meter-bars span { height: 12px; border-radius: 4px; }
+.meter-bars .on { outline: 3px solid var(--ink); outline-offset: 1px; }
+.meter-none { background: #cfe3d3; }
+.meter-mild { background: #f1d58a; }
+.meter-moderate { background: #e39a3b; }
+.meter-severe { background: #b3261e; }
+.meter-labels { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 4px; }
+.meter-labels .on { color: var(--ink); font-weight: 700; }
+.examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.examples figure { margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+.examples figcaption { font-size: 0.8rem; line-height: 1.3; }
+.example-box { height: 104px; border-radius: 8px; background: #e9efe6; display: grid; place-items: center; }
+.stages { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+.stages li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.15rem; padding: 0.5rem 0.25rem; border-radius: 10px; background: var(--bg); color: var(--muted); font-size: 0.85rem; }
+.stages li strong { color: var(--ink); }
+.stages li.current { background: var(--amber-tint); color: var(--ink); outline: 2px solid #8a4b00; }
+.you-are-here { font-size: 0.75rem; font-weight: 700; color: #8a4b00; }
+fieldset { border: 1px solid var(--line); margin: 0; min-width: 0; }
+legend { float: left; width: 100%; padding: 0; font-weight: 700; font-size: 1.05rem; }
+legend + * { clear: both; }
+.ref-leaves { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.ref-leaf { min-height: 96px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); font: inherit; font-size: 0.85rem; color: var(--ink); display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 0.5rem 0.25rem; cursor: pointer; }
+.ref-leaf.selected, .choice-wide.selected { border: 3px solid var(--green-dark); background: var(--green-tint); font-weight: 700; }
+.choice-wide { text-align: left; padding: 0.5rem 0.75rem; width: 100%; }
+.result-box { border: 2px solid var(--ink); }
+.result-box p { margin: 0; }
+.result-level { font-size: 1.6rem; font-weight: 700; line-height: 1.2; }
+.explain { background: var(--bg); border-radius: 10px; padding: 0.6rem 0.75rem; display: flex; flex-direction: column; gap: 0.15rem; }
+.stack-xs { display: flex; flex-direction: column; gap: 0.25rem; }
+.view-switch { display: flex; gap: 0.4rem; padding: 0.5rem 1rem 0; flex-wrap: wrap; }
+.view-switch .choice { flex: 1 1 auto; padding: 0 0.6rem; font-size: 0.9rem; min-height: 44px; }
+.heatmap { position: absolute; inset: 0; display: grid; filter: blur(10px); pointer-events: none; }
+.heat-legend { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--muted); }
+.heat-scale { flex: 1; height: 10px; border-radius: 5px; background: linear-gradient(90deg, rgba(214, 69, 0, 0.05), rgba(214, 69, 0, 0.7)); }
