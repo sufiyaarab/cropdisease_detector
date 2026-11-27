@@ -31,7 +31,10 @@ npm install
 npm run dev                      # http://localhost:5173
 ```
 
-Open http://localhost:5173, create an account (any email, 8+ character password) and scan a leaf photo.
+Open http://localhost:5173 and tap **Log in as demo user** (`demo@example.com` / `demo-password`), or create your own account, then scan a leaf photo.
+Accounts and saved plants are wiped whenever the backend restarts; the demo account is recreated each time.
+
+**Windows notes:** activate the environment with `.venv\Scripts\activate` instead of the `source` line. If `npm` is "not recognized", install Node.js LTS from nodejs.org and open a new terminal. http://localhost:8000 shows a 404 on purpose; use http://localhost:8000/docs.
 To test on a phone, run `npm run dev -- --host` and set `VITE_API_BASE_URL` and `ALLOWED_ORIGINS` to your laptop's network address.
 
 ## Run the tests
@@ -53,7 +56,7 @@ cd frontend && npm test && npm run build
 | `contracts/` | `openapi.json` (API contract) and `model_io.md` (model contract) | Lead |
 | `db/migrations/` | Draft Supabase schema | Backend |
 | `ml/` | Empty: training notebooks and code go here | ML |
-| `docs/` | Flow-to-code map, validation rules | Everyone |
+| `docs/` | Flow-to-code map, validation rules, disease pictures and severity (`disease-visuals.md`) | Everyone |
 
 ## What is real and what is a stand-in
 
@@ -66,6 +69,8 @@ cd frontend && npm test && npm run build
 | AI model | **Stub: gives made-up answers** | EfficientNet-B0 from Hugging Face Hub (`pipeline/model.py`) |
 | Confidence threshold (0.70) and "not sure" screen | Real | n/a |
 | Care plans | Draft text, practices only, not reviewed | Reviewed Ontario treatment table |
+| Severity estimate | Placeholder (counts brown and yellow pixels on the leaf) | Checked against hand-marked photos, then the leaf detector (Tier 2) |
+| Disease pictures | Drawings with draft captions | Licensed photos, credited, expert-checked stages |
 | Login and data storage | In memory, wiped on restart | Supabase Auth + Postgres + private storage |
 | Outbreak alerts | Sample data | Opt-in scan reports, admin reviewed |
 
