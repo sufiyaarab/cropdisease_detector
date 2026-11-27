@@ -7,6 +7,7 @@ Your API key never goes in a file. Set it in the terminal first:
 Then:
     python ml/src/download_roboflow.py --list-classes     # print each dataset's class names
     python ml/src/download_roboflow.py --out data/        # download and add the images
+    python ml/src/download_roboflow.py --out data/ --scenes-out scenes/   # also keep whole photos (multi-leaf test)
 
 Datasets and class mappings are set in ml/configs/roboflow_datasets.json.
 Formats: "coco" or "yolov8" (object detection: each leaf box is cropped into its own image)
@@ -24,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 IMG_EXT = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 MIN_BOX_PX = 64     # skip leaf boxes smaller than this (too blurry to learn from)
 BOX_PADDING = 0.10  # keep a little context around each leaf box
+SCENE_MAX_SIDE = 1280  # whole photos kept for eval_scenes.py are shrunk to this
 
 
 def our_labels() -> set[str]:
@@ -123,7 +125,7 @@ def read_coco(location):
 READERS = {"folder": read_folder, "yolov8": read_yolo, "yolov5pytorch": read_yolo, "coco": read_coco}
 
 
-def add_dataset(entry, location, out, tag, counts):
+def add_dataset(entry, location, out, tag, counts, scenes=None):
     """Crop each mapped leaf box into data/<label>/rf_<tag>__<photo>__<n>.jpg.
 
     Roboflow's augmented copies are collapsed to one per original photo, and the photo name stays in the
@@ -137,7 +139,7 @@ def add_dataset(entry, location, out, tag, counts):
             dupes += 1
             continue
         seen.add(key)
-        img = None
+        img, found = None, set()
         for n, (cls, box) in enumerate(objs):
             label = entry["class_map"].get(cls)
             if not label:
@@ -155,6 +157,13 @@ def add_dataset(entry, location, out, tag, counts):
             dst.parent.mkdir(parents=True, exist_ok=True)
             crop.save(dst, quality=95)
             counts[label] = counts.get(label, 0) + 1
+            found.add(label)
+        if scenes is not None and found and box is not None:
+            whole = img.copy()
+            whole.thumbnail((SCENE_MAX_SIDE, SCENE_MAX_SIDE))
+            name = f"rf_{tag}__{key}.jpg"  # same group key as its leaf crops, so it shares their split
+            whole.save(scenes["dir"] / name, quality=92)
+            scenes["photos"][name] = {"labels": sorted(found), "leaves": len(objs)}
     return len(seen), dupes
 
 
@@ -163,10 +172,17 @@ def main():
     ap.add_argument("--out", type=Path, default=Path("data"))
     ap.add_argument("--cache", type=Path, default=Path("roboflow_downloads"))
     ap.add_argument("--list-classes", action="store_true")
+    ap.add_argument("--scenes-out", type=Path, default=None,
+                    help="also save each whole photo (all its leaves) here, for eval_scenes.py")
     args = ap.parse_args()
 
     cfg = json.loads((ROOT / "configs/roboflow_datasets.json").read_text())
     valid = our_labels()
+    scenes = None
+    if args.scenes_out and not args.list_classes:
+        args.scenes_out.mkdir(parents=True, exist_ok=True)
+        old = args.scenes_out / "scenes.json"
+        scenes = {"dir": args.scenes_out, "photos": json.loads(old.read_text()) if old.exists() else {}}
     for entry in [d for d in cfg["datasets"] if d.get("enabled")]:
         tag = re.sub(r"[^A-Za-z0-9-]", "-", entry["project"])
         location = download(entry, args.cache)
@@ -179,10 +195,13 @@ def main():
         if bad:
             raise SystemExit(f"{tag}: class_map uses labels the app doesn't have: {sorted(bad)}")
         counts: dict[str, int] = {}
-        photos, dupes = add_dataset(entry, location, args.out, tag, counts)
+        photos, dupes = add_dataset(entry, location, args.out, tag, counts, scenes)
         print(f"\n{tag}: {photos} photos used, {dupes} augmented copies skipped. Leaf images added:")
         for label, n in sorted(counts.items()):
             print(f"  {label:28s} {n:5d}")
+    if scenes is not None:
+        (args.scenes_out / "scenes.json").write_text(json.dumps(scenes["photos"], indent=1))
+        print(f"\n{len(scenes['photos'])} whole photos saved to {args.scenes_out} (for eval_scenes.py)")
 
 
 if __name__ == "__main__":
