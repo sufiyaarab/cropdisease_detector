@@ -61,6 +61,52 @@ class CarePlan(BaseModel):
     disclaimer: str
 
 
+SeverityLevel = Literal["none", "mild", "moderate", "severe"]
+
+
+class SpotBox(BaseModel):
+    """A spot found on the photo, as a box in 0..1 photo coordinates (x, y = top left)."""
+
+    x: float
+    y: float
+    w: float
+    h: float
+
+
+class Severity(BaseModel):
+    """Estimated share of the leaf with spots. A colour count for now, so always labelled an estimate."""
+
+    leaf_pct: float
+    level: SeverityLevel
+    photo_index: int
+    spots: list[SpotBox] = []
+    method: Literal["colour_estimate"] = "colour_estimate"
+
+
+class Attention(BaseModel):
+    """Where the model looked: grid rows over the photo, 0 = did not matter, 1 = mattered most."""
+
+    photo_index: int
+    grid: list[list[float]]
+    method: Literal["occlusion"] = "occlusion"
+
+
+class LeafLook(BaseModel):
+    """Inputs for the frontend's leaf drawings: leaf shape and what the spots look like."""
+
+    leaf: Literal["tomato", "apple", "corn"]
+    lesion: str
+    where: Literal["lower", "upper", "all"]
+
+
+class DiseaseVisuals(BaseModel):
+    label: str
+    look: LeafLook
+    examples: list[str]  # captions for: close-up, whole leaf, where on the plant
+    stages: list[str]  # early, spreading, severe; empty for healthy labels
+    source: str
+
+
 class ScanResult(BaseModel):
     id: str
     status: ScanStatus
@@ -76,6 +122,10 @@ class ScanResult(BaseModel):
     # Set when this scan belongs to a saved plant and its diagnosis differs
     # from the plant's previous diagnosed scan.
     changed_from: str | None = None
+    # Set on diagnosed scans.
+    severity: Severity | None = None
+    visuals: DiseaseVisuals | None = None
+    attention: Attention | None = None
 
 
 class PlantCreate(BaseModel):

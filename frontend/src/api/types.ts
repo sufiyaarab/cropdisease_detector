@@ -41,6 +41,43 @@ export interface CarePlan {
   disclaimer: string;
 }
 
+export type SeverityLevel = "none" | "mild" | "moderate" | "severe";
+
+export interface SpotBox {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+export interface Severity {
+  leaf_pct: number;
+  level: SeverityLevel;
+  photo_index: number;
+  spots: SpotBox[];
+  method: "colour_estimate";
+}
+
+export interface Attention {
+  photo_index: number;
+  grid: number[][];
+  method: "occlusion";
+}
+
+export interface LeafLook {
+  leaf: Crop;
+  lesion: string;
+  where: "lower" | "upper" | "all";
+}
+
+export interface DiseaseVisuals {
+  label: string;
+  look: LeafLook;
+  examples: string[];
+  stages: string[];
+  source: string;
+}
+
 export interface ScanResult {
   id: string;
   status: ScanStatus;
@@ -54,6 +91,9 @@ export interface ScanResult {
   model_version: string | null;
   plant_id: string | null;
   changed_from: string | null;
+  severity: Severity | null;
+  visuals: DiseaseVisuals | null;
+  attention: Attention | null;
 }
 
 export interface PlantSummary {

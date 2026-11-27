@@ -65,7 +65,7 @@ export function CarePlanCard({ plan }: { plan: CarePlan }) {
 }
 
 /** Photos are private, so they are fetched with the user's token instead of a plain <img src>. */
-export function ScanPhoto({ scanId, index = 0, alt }: { scanId: string; index?: number; alt: string }) {
+export function useScanPhotoUrl(scanId: string, index = 0): string | null {
   const [url, setUrl] = useState<string | null>(null);
   useEffect(() => {
     let objectUrl: string | null = null;
@@ -83,6 +83,11 @@ export function ScanPhoto({ scanId, index = 0, alt }: { scanId: string; index?: 
       if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
   }, [scanId, index]);
+  return url;
+}
+
+export function ScanPhoto({ scanId, index = 0, alt }: { scanId: string; index?: number; alt: string }) {
+  const url = useScanPhotoUrl(scanId, index);
   return url ? <img className="thumb" src={url} alt={alt} /> : <div className="thumb thumb-empty" aria-hidden="true" />;
 }
 

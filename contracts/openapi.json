@@ -611,6 +611,37 @@
   },
   "components": {
     "schemas": {
+      "Attention": {
+        "properties": {
+          "photo_index": {
+            "type": "integer",
+            "title": "Photo Index"
+          },
+          "grid": {
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Grid"
+          },
+          "method": {
+            "type": "string",
+            "const": "occlusion",
+            "title": "Method",
+            "default": "occlusion"
+          }
+        },
+        "type": "object",
+        "required": [
+          "photo_index",
+          "grid"
+        ],
+        "title": "Attention",
+        "description": "Where the model looked: grid rows over the photo, 0 = did not matter, 1 = mattered most."
+      },
       "Body_create_scan_scans_post": {
         "properties": {
           "crop": {
@@ -775,6 +806,44 @@
         ],
         "title": "Credentials"
       },
+      "DiseaseVisuals": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "look": {
+            "$ref": "#/components/schemas/LeafLook"
+          },
+          "examples": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Examples"
+          },
+          "stages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Stages"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          }
+        },
+        "type": "object",
+        "required": [
+          "label",
+          "look",
+          "examples",
+          "stages",
+          "source"
+        ],
+        "title": "DiseaseVisuals"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -787,6 +856,40 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "LeafLook": {
+        "properties": {
+          "leaf": {
+            "type": "string",
+            "enum": [
+              "tomato",
+              "apple",
+              "corn"
+            ],
+            "title": "Leaf"
+          },
+          "lesion": {
+            "type": "string",
+            "title": "Lesion"
+          },
+          "where": {
+            "type": "string",
+            "enum": [
+              "lower",
+              "upper",
+              "all"
+            ],
+            "title": "Where"
+          }
+        },
+        "type": "object",
+        "required": [
+          "leaf",
+          "lesion",
+          "where"
+        ],
+        "title": "LeafLook",
+        "description": "Inputs for the frontend's leaf drawings: leaf shape and what the spots look like."
       },
       "OutbreakAlert": {
         "properties": {
@@ -1158,6 +1261,36 @@
               }
             ],
             "title": "Changed From"
+          },
+          "severity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Severity"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "visuals": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DiseaseVisuals"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "attention": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Attention"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
@@ -1192,6 +1325,79 @@
           "email"
         ],
         "title": "Session"
+      },
+      "Severity": {
+        "properties": {
+          "leaf_pct": {
+            "type": "number",
+            "title": "Leaf Pct"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "none",
+              "mild",
+              "moderate",
+              "severe"
+            ],
+            "title": "Level"
+          },
+          "photo_index": {
+            "type": "integer",
+            "title": "Photo Index"
+          },
+          "spots": {
+            "items": {
+              "$ref": "#/components/schemas/SpotBox"
+            },
+            "type": "array",
+            "title": "Spots",
+            "default": []
+          },
+          "method": {
+            "type": "string",
+            "const": "colour_estimate",
+            "title": "Method",
+            "default": "colour_estimate"
+          }
+        },
+        "type": "object",
+        "required": [
+          "leaf_pct",
+          "level",
+          "photo_index"
+        ],
+        "title": "Severity",
+        "description": "Estimated share of the leaf with spots. A colour count for now, so always labelled an estimate."
+      },
+      "SpotBox": {
+        "properties": {
+          "x": {
+            "type": "number",
+            "title": "X"
+          },
+          "y": {
+            "type": "number",
+            "title": "Y"
+          },
+          "w": {
+            "type": "number",
+            "title": "W"
+          },
+          "h": {
+            "type": "number",
+            "title": "H"
+          }
+        },
+        "type": "object",
+        "required": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ],
+        "title": "SpotBox",
+        "description": "A spot found on the photo, as a box in 0..1 photo coordinates (x, y = top left)."
       },
       "ValidationError": {
         "properties": {
