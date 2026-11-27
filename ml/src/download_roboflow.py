@@ -46,6 +46,13 @@ def download(entry: dict, cache: Path) -> Path:
     project = rf.workspace(entry["workspace"]).project(entry["project"])
     location = cache / f"{entry['workspace']}__{entry['project']}__v{entry['version']}__{entry['format']}"
     if not location.exists():
+        available = sorted(int(os.path.basename(v["id"])) for v in project.get_version_information())
+        if entry["version"] not in available:
+            raise SystemExit(
+                f"{entry['workspace']}/{entry['project']}: version {entry['version']} doesn't exist. "
+                f"Available versions: {available or 'none (this copy has no downloadable versions; use another copy)'}. "
+                "Fix \"version\" in ml/configs/roboflow_datasets.json."
+            )
         project.version(entry["version"]).download(entry["format"], location=str(location))
     return location
 

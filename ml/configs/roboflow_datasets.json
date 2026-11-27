@@ -11,28 +11,27 @@
   ],
   "datasets": [
     {
-      "name": "FieldPlant (field photos, CC BY 4.0). Use the workspace/project/version from your old download_data.py",
+      "name": "FieldPlant v11 (field photos, CC BY 4.0). 'Tomato blight leaf' = Mildiou (late blight) in the original release",
       "enabled": true,
       "workspace": "plant-disease-detection",
       "project": "fieldplant",
       "version": 11,
       "format": "coco",
       "class_map": {
-        "Tomato_healthy": "tomato_healthy",
-        "Tomato_Mildiou": "tomato_late_blight",
-        "Corn_Healthy": "corn_healthy",
+        "Tomato healthy": "tomato_healthy",
+        "Tomato blight leaf": "tomato_late_blight",
         "Corn Healthy": "corn_healthy",
-        "Corn_Blight": "corn_northern_leaf_blight",
-        "Corn_Rust": "corn_common_rust",
-        "Corn_Cercosporiose": "corn_gray_leaf_spot"
+        "Corn leaf blight": "corn_northern_leaf_blight",
+        "Corn rust leaf": "corn_common_rust",
+        "Corn Gray leaf spot": "corn_gray_leaf_spot"
       }
     },
     {
-      "name": "PlantDoc (field and web photos, CC BY 4.0)",
+      "name": "PlantDoc (field and web photos, CC BY 4.0). Version 8 of this copy is citrus-only; use 1",
       "enabled": true,
       "workspace": "nick-speer-ofaik",
       "project": "plantdoc-dxufs",
-      "version": 8,
+      "version": 1,
       "format": "coco",
       "class_map": {
         "Tomato leaf": "tomato_healthy",
